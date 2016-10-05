@@ -1,3 +1,8 @@
+2016-05-10
+
+Shell 1.1.2
+- Fix issue in ShellObjectWatcher that prevented an application from terminating.
+
 02/01/2016
  
 Core 1.1.2
