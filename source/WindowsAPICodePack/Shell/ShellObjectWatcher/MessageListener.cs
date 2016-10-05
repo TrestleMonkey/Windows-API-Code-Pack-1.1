@@ -39,6 +39,7 @@ namespace Microsoft.WindowsAPICodePack.Shell
                 {
                     _windowThread = new Thread(ThreadMethod);
                     _windowThread.SetApartmentState(ApartmentState.STA);
+                    _windowThread.IsBackground = true;      // Set so thread won't stop application from terminating.
                     _windowThread.Name = "ShellObjectWatcherMessageListenerHelperThread";
 
                     lock (_crossThreadWindowLock)
@@ -147,6 +148,8 @@ namespace Microsoft.WindowsAPICodePack.Shell
                     }
                     break;
                 case (uint)WindowMessage.Destroy:
+                    // Window destroyed. Thread can now finish.
+                    _running = false;
                     break;
                 default:
                     MessageListener listener;
